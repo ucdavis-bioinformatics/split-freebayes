@@ -1,5 +1,5 @@
 #!/bin/bash
-#
+
 #SBATCH --job-name=freebayes # Job name
 #SBATCH --nodes=1
 #SBATCH --ntasks=1 # Number of cores
@@ -8,10 +8,10 @@
 #SBATCH --partition=production
 
 start=`date +%s`
-
 hostname
+echo region $2
 
-module load freebayes/1.1.0
+module load freebayes
 
 GENOME="/share/biocore/projects/Bannasch_D_UCDVM/2018_March_Canine_WGS/ref/genome.fa"
 BAMLIST="/share/biocore/projects/Bannasch_D_UCDVM/2018_March_Canine_WGS/03-Align-100-dogs/bamlist.txt"
@@ -33,7 +33,5 @@ echo $call
 eval $call
 
 end=`date +%s`
-
 runtime=$((end-start))
-
-echo $runtime
+echo Runtime: $runtime
