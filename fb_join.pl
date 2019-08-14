@@ -1,5 +1,7 @@
 #!/usr/bin/perl
 
+$OUTDIR="variant";
+
 if (scalar(@ARGV) < 2) {
     print STDERR "Usage: $0 <chr/pos file> <window size>\n";
     exit(1);
@@ -15,13 +17,13 @@ while (<$chrfile>) {
 
     for ($i=$beg; $i<=$end; $i+=$window) {
         if ($i+$window <= $end) {
-            $fn = "variant/fb.${chr}_$i-".($i+$window-1).".vcf";
+            $fn = "$OUTDIR/fb.${chr}_$i-".($i+$window-1).".vcf";
             if (! -e $fn || -z $fn) {
                 print STDERR "ERROR: $fn does not exist or is zero size.\n";
                 $flag=1;
             }
         } else {
-            $fn = "variant/fb.${chr}_$i-$end.vcf";
+            $fn = "$OUTDIR/fb.${chr}_$i-$end.vcf";
             if (! -e $fn || -z $fn) {
                 print STDERR "ERROR: $fn does not exist or is zero size.\n";
                 $flag=1;
